@@ -1,0 +1,78 @@
+<h2>Order Page</h2>
+
+<form [formGroup]="orderForm" (ngSubmit)="processForm()">
+    <div>
+        Contact Number: <input type="text" formControlName="contactNumber">
+    </div>
+    <br>
+    <div>
+        Name: <input type="text" formControlName="name">
+    </div>
+    <div>
+        Gender:
+        <input type="radio" value="male" formControlName="gender"> Male
+        <input type="radio" value="female" formControlName="gender"> Female
+    </div>    
+    <div>
+        Date of Birth: <input type="date" formControlName="dob">
+    </div>
+    <br>
+    <div>
+        Order Date: <input type="date" formControlName="orderDate">
+    </div>
+    <br>
+    <!-- <form-field appearance="fill"> -->
+        <label>Order Type</label>
+        <select name="orderType" formControlName="orderType" (change) = "onSelectionChange($event.target.value)">
+          <option value = "Buy" >
+            Buy
+          </option>
+          <option value = "Sell" >
+            Sell
+          </option>
+        </select>
+    <!-- </form-field>     -->
+    <!-- <label for="orderType">Order Type:</label>
+    <select formControlName = "orderType">
+        <option value="Buy" >Buy</option>
+        <option value="Sell">Sell</option>
+    </select> -->
+    <br>
+    <br>
+
+    <div>
+        Order Units: <input type="text" formControlName="orderUnits" (change)="updatesettlementamount()">
+    </div>
+    <div *ngIf="orderForm.get('orderUnits').hasError('pattern')" style="color:red">
+        Please enter only numbers!
+    </div>
+        
+
+    <br>
+    BTCSGD Price: $ {{result.bid}} / {{result.ask}}
+    <br><br>
+
+    <div>
+        Paynow QRCode URL: <input type="text" formControlName="paynowURL">
+    </div>
+    <br>
+    <div>
+        Bitcoin Address: <input type="text" formControlName="bitcoinAddress">
+    </div>
+    <br>
+    <br>
+    Amount in SGD: $ {{settlementAmount}}
+    <br><br>
+    <button type="submit" [disabled] = "orderForm.invalid">
+        Submit
+    </button>
+</form>
+
+<button (click) = "resetForm()">
+    Reset
+</button>
+    
+
+
+
+<!-- <app-tasks [todoArray] = "todoArray"></app-tasks> -->
